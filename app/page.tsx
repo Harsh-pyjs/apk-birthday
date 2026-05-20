@@ -1,65 +1,136 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import type { Metadata } from "next";
+
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+  const [progress, setProgress] = useState(0);
+  const [finished, setFinished] = useState(false);
+
+  useEffect(() => {
+    let current = 0;
+
+    const interval = setInterval(() => {
+      current += 1;
+
+      setProgress(current);
+
+      if (current >= 100) {
+        clearInterval(interval);
+
+        setTimeout(() => {
+          setFinished(true);
+        }, 500);
+      }
+    }, 45);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // MAIN WEBSITE
+  if (finished) {
+    return (
+      <main className="relative min-h-screen overflow-hidden bg-black text-white">
+
+        {/* BACKGROUND */}
+        <div className="absolute inset-0 bg-black" />
+
+        {/* PINK GLOW */}
+        <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-pink-500/10 blur-[180px] rounded-full" />
+
+        {/* NAVBAR */}
+        <Navbar />
+
+        {/* HERO */}
+        <section className="min-h-screen flex items-center justify-center px-6 relative z-10">
+          <div className="text-center max-w-4xl">
+
+            {/* MAIN TEXT */}
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-4xl sm:text-5xl md:text-8xl font-black leading-tight tracking-tight"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Happy Birthday To The Girl
+              <br />
+
+              Who Turned Ordinary Days
+              <br />
+
+              Into Memories ✨
+            </motion.h1>
+
+            {/* SUBTEXT */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              transition={{ delay: 1 }}
+              className="mt-8 text-sm md:text-lg text-white/50 leading-relaxed"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              Some people enter life quietly.
+              <br />
+              But somehow become the loudest part of it.
+            </motion.p>
+
+            {/* BUTTON */}
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5 }}
+              className="mt-12 px-8 py-4 rounded-full bg-pink-400/10 border border-pink-300/20 backdrop-blur-xl text-white hover:bg-pink-400/20 transition-all duration-300 shadow-[0_0_40px_rgba(255,105,180,0.15)]"
+            >
+              {">>"} Make a Wish!
+            </motion.button>
+
+          </div>
+        </section>
       </main>
-    </div>
+    );
+  }
+
+  // LOADING SCREEN
+  return (
+    <main className="h-screen bg-black overflow-hidden flex items-center justify-center relative text-white">
+
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 bg-black" />
+
+      {/* PINK GLOW */}
+      <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-pink-500/10 blur-[180px] rounded-full" />
+
+      <div className="relative z-10 w-full max-w-2xl px-6">
+
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-4xl md:text-6xl font-bold mb-10"
+        >
+          Loading the Happiest Day on Earth...
+        </motion.h1>
+
+        {/* BAR */}
+        <div className="w-full h-4 bg-white/10 rounded-full overflow-hidden border border-white/10 backdrop-blur-xl">
+          <motion.div
+            className="h-full bg-gradient-to-r from-pink-500 via-pink-300 to-white"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        {/* DATES */}
+        <div className="flex justify-between mt-4 text-white/40 text-sm">
+          <span>Jan 1, 2026</span>
+
+          <span>
+            Day {Math.floor((progress / 100) * 271)} / 271
+          </span>
+
+          <span>Sept 28, 2026</span>
+        </div>
+      </div>
+    </main>
   );
 }
