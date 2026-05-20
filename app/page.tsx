@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 
 export default function Home() {
@@ -77,6 +78,7 @@ export default function Home() {
             </motion.p>
 
             {/* BUTTON */}
+          <Link href="/make-a-wish">
             <motion.button
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -85,7 +87,7 @@ export default function Home() {
             >
               {">>"} Make a Wish!
             </motion.button>
-
+          </Link>
           </div>
         </section>
       </main>
