@@ -386,7 +386,7 @@ export default function WishPage() {
                   </p>
 
                   <p>
-                    Even on the days you feel lost, tired, or not enough —
+                    Even on the days you feel lost, tired, or not enough -
                     you are still someone worth loving, protecting,
                     and believing in.
                   </p>
@@ -400,7 +400,7 @@ export default function WishPage() {
                   </p>
 
                   <p className="pt-4 text-right font-semibold">
-                    — Someone who truly cares ✨
+                    - Someone who truly cares ✨
                   </p>
                 </div>
 
