@@ -13,9 +13,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
-      </body>
+      <head>
+        {/* PNG Fallback */}
+        <link rel="icon" type="image/png" href="/favicon.png" />
+
+        {/* GIF */}
+        <link rel="alternate icon" type="image/gif" href="/favicon.gif" />
+      </head>
+
+      <body>{children}</body>
     </html>
   );
 }

@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import Link from "next/link";
 
-
 export default function Home() {
   const [progress, setProgress] = useState(0);
   const [finished, setFinished] = useState(false);
