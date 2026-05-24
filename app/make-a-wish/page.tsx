@@ -48,15 +48,15 @@ export default function WishPage() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-black text-white">
+    <main className="relative min-h-screen overflow-hidden bg-[#070007] text-white">
 
       {/* BACKGROUND */}
       <div className="absolute inset-0 bg-black" />
 
-      {/* PINK GLOW */}
+      {/* TOP GLOW */}
       <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-pink-500/10 blur-[180px] rounded-full" />
 
-      {/* EXTRA GLOW */}
+      {/* BOTTOM GLOW */}
       <div className="absolute bottom-[-200px] right-[-100px] w-[400px] h-[400px] bg-fuchsia-500/10 blur-[150px] rounded-full" />
 
       {/* NAVBAR */}
@@ -132,60 +132,50 @@ export default function WishPage() {
 
               {/* TITLE */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-center mb-6"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-center mb-20 relative z-50"
               >
                 <motion.h1
                   animate={{
                     textShadow: [
-                      "0 0 10px rgba(255,255,255,0.2)",
-                      "0 0 30px rgba(255,105,180,0.5)",
-                      "0 0 10px rgba(255,255,255,0.2)",
+                      "0 0 12px rgba(255,255,255,0.15)",
+                      "0 0 35px rgba(255,105,180,0.45)",
+                      "0 0 12px rgba(255,255,255,0.15)",
                     ],
                   }}
                   transition={{
                     repeat: Infinity,
                     duration: 3,
                   }}
-                  className="text-5xl sm:text-6xl md:text-7xl font-black text-pink-100 leading-tight"
+                  className="text-4xl sm:text-5xl md:text-6xl font-black text-pink-100 tracking-tight"
                 >
-                  Make A Wish
-                  <br />
-                  ✨
+                  Make A Wish ✨
                 </motion.h1>
 
-                <p className="mt-4 text-white/50 text-sm sm:text-base tracking-wide">
+                <p className="mt-4 text-pink-100/60 text-sm sm:text-base">
                   Tap the cake to blow the candles
                 </p>
-              </motion.div>
-
-              {/* TIP */}
-              <motion.div
-                animate={{
-                  opacity: [0.5, 1, 0.5],
-                  y: [0, -4, 0],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2.5,
-                }}
-                className="mb-12 px-5 py-3 rounded-full border border-pink-300/20 bg-white/5 backdrop-blur-2xl text-xs sm:text-sm text-pink-100 shadow-[0_0_40px_rgba(255,105,180,0.15)]"
-              >
-                ✨ Tap before the candles melt away
               </motion.div>
 
               {/* CAKE WRAPPER */}
               <motion.div
                 whileHover={{
-                  scale: 1.03,
+                  scale: 1.02,
                 }}
                 whileTap={{
                   scale: 0.97,
                 }}
+                transition={{
+                  duration: 0.3,
+                }}
                 onClick={blowCandles}
                 className="relative flex flex-col items-center cursor-pointer"
               >
+
+                {/* BACK GLOW */}
+                <div className="absolute w-[360px] h-[360px] rounded-full bg-pink-500/20 blur-[140px] top-0" />
 
                 {/* FLOATING STARS */}
                 <motion.div
@@ -196,7 +186,7 @@ export default function WishPage() {
                     repeat: Infinity,
                     duration: 3,
                   }}
-                  className="absolute -top-16 left-10 text-pink-200 text-xl"
+                  className="absolute left-0 top-10 text-pink-200 text-xl"
                 >
                   ✦
                 </motion.div>
@@ -210,72 +200,49 @@ export default function WishPage() {
                     duration: 2.5,
                     delay: 0.5,
                   }}
-                  className="absolute -top-10 right-8 text-pink-300 text-lg"
+                  className="absolute right-0 top-20 text-pink-300 text-lg"
                 >
                   ✨
                 </motion.div>
 
                 {/* CANDLES */}
-                <div className="absolute -top-24 sm:-top-28 flex items-end gap-10 sm:gap-16 z-30">
+                <div className="absolute -top-20 flex items-end gap-16 z-30">
 
                   {/* CANDLE 1 */}
                   <div className="flex flex-col items-center">
 
-                    {/* FLAME */}
-                    <AnimatePresence>
-                      {!candlesBlown && (
-                        <motion.div
-                          initial={{ opacity: 1 }}
-                          exit={{
-                            opacity: 0,
-                            scale: 0,
-                            y: -20,
-                          }}
-                          animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [1, 0.7, 1],
-                          }}
-                          transition={{
-                            repeat: Infinity,
-                            duration: 0.7,
-                          }}
-                          className="w-5 h-7 bg-orange-400 rounded-full blur-[1px] shadow-[0_0_35px_rgba(255,140,0,1)]"
-                        />
-                      )}
-                    </AnimatePresence>
+                    {!candlesBlown && (
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.15, 1],
+                          opacity: [1, 0.7, 1],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 0.8,
+                        }}
+                        className="w-5 h-8 bg-gradient-to-b from-yellow-200 via-orange-400 to-red-500 rounded-full blur-[1px] shadow-[0_0_40px_rgba(255,140,0,1)]"
+                      />
+                    )}
 
-                    {/* SMOKE */}
-                    <AnimatePresence>
-                      {candlesBlown && (
-                        <motion.div
-                          initial={{
-                            opacity: 0.8,
-                            y: 0,
-                            scale: 1,
-                          }}
-                          animate={{
-                            opacity: 0,
-                            y: -45,
-                            scale: 2.5,
-                          }}
-                          transition={{
-                            duration: 2,
-                          }}
-                          className="w-6 h-6 rounded-full bg-gray-300 blur-xl"
-                        />
-                      )}
-                    </AnimatePresence>
+                    {candlesBlown && (
+                      <motion.div
+                        initial={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: 0, y: -40 }}
+                        transition={{ duration: 2 }}
+                        className="w-6 h-6 rounded-full bg-gray-300 blur-xl"
+                      />
+                    )}
 
-                    {/* CANDLE BODY */}
                     <motion.div
                       animate={{
-                        height: [86, 80, 86],
+                        y: [0, 2, 0],
                       }}
                       transition={{
                         repeat: Infinity,
-                        duration: 3,
+                        duration: 2,
                       }}
-                      className="w-10 rounded-full bg-gradient-to-b from-pink-50 via-pink-200 to-pink-400 border border-white/30 flex items-center justify-center text-black font-black text-5xl shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                      className="w-11 h-[92px] rounded-full bg-gradient-to-b from-pink-50 via-pink-200 to-pink-400 border border-white/20 flex items-center justify-center text-black text-5xl font-black shadow-[0_0_30px_rgba(255,255,255,0.2)]"
                     >
                       1
                     </motion.div>
@@ -284,104 +251,74 @@ export default function WishPage() {
                   {/* CANDLE 8 */}
                   <div className="flex flex-col items-center">
 
-                    {/* FLAME */}
-                    <AnimatePresence>
-                      {!candlesBlown && (
-                        <motion.div
-                          initial={{ opacity: 1 }}
-                          exit={{
-                            opacity: 0,
-                            scale: 0,
-                            y: -20,
-                          }}
-                          animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [1, 0.7, 1],
-                          }}
-                          transition={{
-                            repeat: Infinity,
-                            duration: 0.7,
-                            delay: 0.2,
-                          }}
-                          className="w-5 h-7 bg-orange-400 rounded-full blur-[1px] shadow-[0_0_35px_rgba(255,140,0,1)]"
-                        />
-                      )}
-                    </AnimatePresence>
+                    {!candlesBlown && (
+                      <motion.div
+                        animate={{
+                          scale: [1, 1.15, 1],
+                          opacity: [1, 0.7, 1],
+                        }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 0.8,
+                          delay: 0.2,
+                        }}
+                        className="w-5 h-8 bg-gradient-to-b from-yellow-200 via-orange-400 to-red-500 rounded-full blur-[1px] shadow-[0_0_40px_rgba(255,140,0,1)]"
+                      />
+                    )}
 
-                    {/* SMOKE */}
-                    <AnimatePresence>
-                      {candlesBlown && (
-                        <motion.div
-                          initial={{
-                            opacity: 0.8,
-                            y: 0,
-                            scale: 1,
-                          }}
-                          animate={{
-                            opacity: 0,
-                            y: -45,
-                            scale: 2.5,
-                          }}
-                          transition={{
-                            duration: 2,
-                          }}
-                          className="w-6 h-6 rounded-full bg-gray-300 blur-xl"
-                        />
-                      )}
-                    </AnimatePresence>
+                    {candlesBlown && (
+                      <motion.div
+                        initial={{ opacity: 1, y: 0 }}
+                        animate={{ opacity: 0, y: -40 }}
+                        transition={{ duration: 2 }}
+                        className="w-6 h-6 rounded-full bg-gray-300 blur-xl"
+                      />
+                    )}
 
-                    {/* CANDLE BODY */}
                     <motion.div
                       animate={{
-                        height: [86, 80, 86],
+                        y: [0, 2, 0],
                       }}
                       transition={{
                         repeat: Infinity,
-                        duration: 3,
-                        delay: 0.3,
+                        duration: 2,
+                        delay: 0.2,
                       }}
-                      className="w-10 rounded-full bg-gradient-to-b from-pink-50 via-pink-200 to-pink-400 border border-white/30 flex items-center justify-center text-black font-black text-5xl shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                      className="w-11 h-[92px] rounded-full bg-gradient-to-b from-pink-50 via-pink-200 to-pink-400 border border-white/20 flex items-center justify-center text-black text-5xl font-black shadow-[0_0_30px_rgba(255,255,255,0.2)]"
                     >
                       8
                     </motion.div>
                   </div>
                 </div>
 
-                {/* CHERRIES */}
-                <div className="absolute -top-6 flex gap-20 z-20">
-                  <div className="w-5 h-5 rounded-full bg-red-500 shadow-[0_0_20px_rgba(255,0,0,0.7)]" />
-                  <div className="w-5 h-5 rounded-full bg-red-500 shadow-[0_0_20px_rgba(255,0,0,0.7)]" />
-                </div>
+                {/* CAKE */}
+                <div className="relative w-[240px] sm:w-[320px] h-[170px] rounded-t-[5rem] rounded-b-[2.5rem] bg-gradient-to-b from-pink-100 via-pink-300 to-pink-500 overflow-hidden border border-pink-100/20 shadow-[0_0_120px_rgba(255,105,180,0.3)]">
 
-                {/* MAIN CAKE */}
-                <div className="relative w-[280px] sm:w-[340px] h-40 sm:h-44 rounded-t-[5rem] rounded-b-[2.5rem] bg-gradient-to-b from-pink-100 via-pink-300 to-pink-500 border border-pink-100/20 shadow-[0_0_100px_rgba(255,105,180,0.25)] overflow-hidden">
-
-                  {/* TOP ICING */}
-                  <div className="absolute top-0 left-0 w-full h-14 bg-gradient-to-b from-white to-pink-50 rounded-b-[3rem]">
+                  {/* ICING */}
+                  <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-pink-50 rounded-b-[4rem]">
 
                     {/* DRIPS */}
-                    <div className="absolute left-8 top-8 w-5 h-10 bg-pink-50 rounded-b-full" />
-                    <div className="absolute left-24 top-8 w-6 h-14 bg-pink-50 rounded-b-full" />
-                    <div className="absolute left-44 top-8 w-5 h-12 bg-pink-50 rounded-b-full" />
-                    <div className="absolute right-10 top-8 w-7 h-16 bg-pink-50 rounded-b-full" />
+                    <div className="absolute left-6 top-8 w-5 h-10 bg-pink-50 rounded-b-full" />
+                    <div className="absolute left-20 top-8 w-6 h-16 bg-pink-50 rounded-b-full" />
+                    <div className="absolute left-40 top-8 w-5 h-12 bg-pink-50 rounded-b-full" />
+                    <div className="absolute right-8 top-8 w-6 h-14 bg-pink-50 rounded-b-full" />
                   </div>
 
                   {/* SPRINKLES */}
-                  <div className="absolute inset-0 opacity-70">
+                  <div className="absolute inset-0 opacity-80">
 
-                    <div className="absolute top-20 left-10 w-2 h-2 bg-white rounded-full" />
-                    <div className="absolute top-28 left-20 w-2 h-2 bg-yellow-200 rounded-full" />
-                    <div className="absolute top-24 left-36 w-2 h-2 bg-white rounded-full" />
-                    <div className="absolute top-16 left-56 w-2 h-2 bg-pink-100 rounded-full" />
-                    <div className="absolute top-24 right-12 w-2 h-2 bg-white rounded-full" />
-                    <div className="absolute top-28 right-28 w-2 h-2 bg-yellow-200 rounded-full" />
+                    <div className="absolute top-20 left-10 w-3 h-3 bg-white rounded-full" />
+                    <div className="absolute top-28 left-20 w-3 h-3 bg-yellow-200 rounded-full" />
+                    <div className="absolute top-24 left-36 w-3 h-3 bg-pink-100 rounded-full" />
+                    <div className="absolute top-32 left-52 w-3 h-3 bg-white rounded-full" />
+                    <div className="absolute top-24 right-12 w-3 h-3 bg-yellow-200 rounded-full" />
 
                     {/* STARS */}
-                    <div className="absolute top-20 left-28 text-white text-xs">
+                    <div className="absolute top-24 left-16 text-white text-sm">
                       ✦
                     </div>
 
-                    <div className="absolute top-24 right-20 text-pink-100 text-xs">
+                    <div className="absolute top-20 right-20 text-pink-100 text-sm">
                       ✨
                     </div>
                   </div>
@@ -390,14 +327,14 @@ export default function WishPage() {
                   <div className="absolute top-0 left-0 w-24 h-full bg-white/10 blur-2xl rotate-12 translate-x-[-40px]" />
                 </div>
 
-                {/* CAKE BASE */}
-                <div className="relative">
+                {/* PLATE */}
+                <div className="relative mt-4">
 
                   {/* GLOW */}
                   <div className="absolute inset-0 bg-pink-500/30 blur-3xl rounded-full" />
 
                   {/* PLATE */}
-                  <div className="relative w-[310px] sm:w-[380px] h-10 rounded-full bg-gradient-to-b from-pink-200/20 to-pink-500/20 backdrop-blur-xl border border-pink-100/10 mt-3" />
+                  <div className="relative w-[290px] sm:w-[360px] h-10 rounded-full bg-gradient-to-b from-pink-200/20 to-pink-500/20 backdrop-blur-xl border border-pink-100/10" />
                 </div>
               </motion.div>
             </motion.div>
