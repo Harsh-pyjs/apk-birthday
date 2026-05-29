@@ -77,7 +77,7 @@ export default function WishPage() {
               animate={{ y: 0, opacity: 1 }}
               className="text-white/60 text-lg md:text-xl tracking-[0.3em] uppercase"
             >
-              Tap & make a wish ✨
+              Tap & make a wish in ✨
             </motion.p>
 
             <motion.h1
